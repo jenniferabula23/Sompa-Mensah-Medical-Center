@@ -199,7 +199,7 @@ html {
   align-items:    center;
   gap: 30px;
   padding: 35px;
-  backdrop-filter: blur(50px);
+  backdrop-filter: blur(80px);
   transform: translateY(50px);
   opacity: 0;
   visibility: hidden;
