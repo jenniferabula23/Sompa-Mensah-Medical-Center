@@ -25,7 +25,7 @@ const cartToggleFunc = function () { shoppingCart.classList.toggle('active') }
 navToggleBtn.addEventListener('click', function () {
 
   // If the shopping-cart has an `active` class, it will be removed.
-  if (shoppingCart.classList.contains('active')) cartToggleFunc();
+  // if (shoppingCart.classList.contains('active')) cartToggleFunc();
 
   navToggleFunc();
 
