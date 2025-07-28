@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Services - Sompa Mensah Medical Center</title>
+  <link rel="stylesheet" href="./assets/css/foodhub.css">
+  <link rel="stylesheet" href="./assets/css/media_query.css">
+  <!-- Custom CSS -->
+  <style>
+    /*-----------------------------------*\ 
+      #CUSTOM PROPERTY
+    \*-----------------------------------*/
+
+    :root {
+      --red-orange-crayola: hsl(223, 100%, 66%);
+      --space-cadet: hsl(249, 37%, 19%);
+      --pistachio: hsl(88, 50%, 60%);
+      --cultured: hsl(220, 13%, 95%);
+      --saffron: hsl(45, 91%, 58%);
+      --rhythm: hsl(240, 9%, 51%);
+      --white: hsl(0, 0%, 100%);
+      --light-blue: hsl(200, 70%, 90%);
+      --accent-blue: hsl(200, 87%, 51%);
+
+      --fs-1: 46px;
+      --fs-2: 28px;
+      --fs-3: 18px;
+      --fs-4: 15px;
+      --fs-5: 14px;
+
+      --px: 30px;
+      --py: 60px;
+
+      --default-transition: 0.75s ease;
+    }
+
+    /* Reset and Base Styles */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+  
+
+    .container {
+      max-width: 1440px;
+      margin: auto;
+      background: var(--white);
+      overflow: hidden;
+    }
+
+    /* Header */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      padding: 20px 30px;
+      background: hsla(220, 66%, 72%, 0.99);
+      border-bottom: 1px solid hsla(0, 0%, 0%, 0.05);
+      box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.05);
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+
+    .navbar-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .navbar-nav {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    .nav-link {
+      color: var(--space-cadet);
+      text-decoration: none;
+      font-weight: 400;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-link:hover {
+      color: var(--saffron);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--saffron);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .menu-toggle-btn {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+    }
+
+    .line {
+      width: 25px;
+      height: 3px;
+      background: var(--space-cadet);
+      transition: 0.3s;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 150px var(--px) 80px;
+      background: linear-gradient(135deg, var(--light-blue) 0%, var(--cultured) 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,204,0,0.1) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: var(--fs-1);
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--space-cadet);
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    .hero p {
+      font-size: var(--fs-3);
+      color: var(--rhythm);
+      margin-bottom: 30px;
+      opacity: 0;
+      animation: fadeInUp 1s ease 0.3s forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Services Grid */
+    .services-section {
+      padding: var(--py) var(--px);
+      background: var(--white);
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: var(--fs-2);
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: var(--space-cadet);
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-size: var(--fs-4);
+      color: var(--rhythm);
+      margin-bottom: 50px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .service-card:nth-child(1) { animation-delay: 0.1s; }
+    .service-card:nth-child(2) { animation-delay: 0.2s; }
+    .service-card:nth-child(3) { animation-delay: 0.3s; }
+    .service-card:nth-child(4) { animation-delay: 0.4s; }
+    .service-card:nth-child(5) { animation-delay: 0.5s; }
+    .service-card:nth-child(6) { animation-delay: 0.6s; }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--saffron), var(--accent-blue));
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .service-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .service-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--saffron), var(--accent-blue));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: white;
+      margin-bottom: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .service-card:hover .service-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .service-card h3 {
+      font-size: var(--fs-3);
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--space-cadet);
+    }
+
+    .service-card p {
+      color: var(--rhythm);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .service-features {
+      list-style: none;
+      margin-bottom: 20px;
+    }
+
+    .service-features li {
+      padding: 5px 0;
+      color: var(--rhythm);
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .service-features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--pistachio);
+      font-weight: bold;
+    }
+
+    .book-btn {
+      background: linear-gradient(135deg, var(--saffron), var(--accent-blue));
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .book-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 204, 0, 0.3);
+    }
+
+    /* Emergency Section */
+    .emergency-section {
+      background: linear-gradient(135deg, var(--red-orange-crayola), #ff4757);
+      color: white;
+      padding: 60px var(--px);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .emergency-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>') repeat;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    .emergency-content {
+      position: relative;
+      z-index: 2;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .emergency-section h2 {
+      font-size: var(--fs-2);
+      margin-bottom: 15px;
+    }
+
+    .emergency-section p {
+      font-size: var(--fs-3);
+      margin-bottom: 25px;
+    }
+
+    .emergency-phone {
+      font-size: var(--fs-1);
+      font-weight: 700;
+      text-decoration: none;
+      color: white;
+      border: 3px solid white;
+      padding: 15px 30px;
+      border-radius: 50px;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+
+    .emergency-phone:hover {
+      background: white;
+      color: var(--red-orange-crayola);
+      transform: scale(1.05);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--space-cadet);
+      color: var(--cultured);
+      padding: 50px var(--px);
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-logo {
+      width: 80px;
+      margin-bottom: 20px;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      background: var(--saffron);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: var(--space-cadet);
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(255, 204, 0, 0.4);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .navbar-nav {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+
+      .navbar-nav.active {
+        transform: translateX(0);
+      }
+
+      .menu-toggle-btn {
+        display: flex;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .emergency-phone {
+        font-size: 28px;
+        padding: 12px 20px;
+      }
+    }
+
+    /* Interactive Elements */
+    .floating-shapes {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .shape {
+      position: absolute;
+      opacity: 0.1;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .shape:nth-child(1) {
+      top: 20%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .shape:nth-child(2) {
+      top: 60%;
+      right: 10%;
+      animation-delay: 2s;
+    }
+
+    .shape:nth-child(3) {
+      bottom: 20%;
+      left: 20%;
+      animation-delay: 4s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(10deg); }
+    }
+  </style>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <nav class="navbar">
+        <div class="navbar-wrapper">
+          <a href="index.html">
+            <img src="./assets/images/SOMPA MENSAH.png" alt="Sompa Mensah Medical Center Logo" width="80">
+          </a>
+
+          <ul class="navbar-nav" id="navbar-nav">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="services.html" class="nav-link">Services</a></li>
+            <li><a href="https://forms.gle/ux42zVptC8yRAHKA9" class="nav-link">Appointment</a></li>
+            <li><a href="Gallery.html" class="nav-link">Gallery</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+          </ul>
+
+          <button class="menu-toggle-btn" id="menu-toggle">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="floating-shapes">
+          <div class="shape" style="width: 50px; height: 50px; background: var(--saffron); border-radius: 50%;"></div>
+          <div class="shape" style="width: 30px; height: 30px; background: var(--pistachio); border-radius: 50%;"></div>
+          <div class="shape" style="width: 40px; height: 40px; background: var(--accent-blue); border-radius: 50%;"></div>
+        </div>
+        <div class="hero-content">
+          <h1>Comprehensive Healthcare Services</h1>
+          <p>From routine check-ups to specialized treatments, we provide compassionate care tailored to your needs. Our experienced medical team is here to support your health journey every step of the way.</p>
+        </div>
+      </section>
+
+      <!-- Services Section -->
+      <section class="services-section">
+        <h2 class="section-title">Our Medical Services</h2>
+        <p class="section-subtitle">We offer a comprehensive range of healthcare services designed to meet all your medical needs under one roof.</p>
+
+        <div class="services-grid">
+          <!-- General Practice -->
+          <div class="service-card">
+            <div class="service-icon">🩺</div>
+            <h3>General Practice</h3>
+            <p>Comprehensive primary healthcare for patients of all ages, focusing on prevention, diagnosis, and treatment of common conditions.</p>
+            <ul class="service-features">
+              <li>Routine health check-ups</li>
+              <li>Chronic disease management</li>
+              <li>Vaccinations and immunizations</li>
+              <li>Health screenings</li>
+            </ul>
+            <a href="https://forms.gle/ux42zVptC8yRAHKA9" class="book-btn">Book Appointment</a>
+          </div>
+
+          <!-- Emergency Care -->
+          <div class="service-card">
+            <div class="service-icon">🚑</div>
+            <h3>Emergency Services</h3>
+            <p>24/7 emergency medical care with trained professionals ready to handle urgent medical situations and trauma cases.</p>
+            <ul class="service-features">
+              <li>24/7 emergency response</li>
+              <li>Trauma care</li>
+              <li>Critical care stabilization</li>
+              <li>Emergency surgery</li>
+            </ul>
+            <a href="tel:+233-xxx-xxxx" class="book-btn">Emergency Line</a>
+          </div>
+
+          <!-- Maternity Care -->
+          <div class="service-card">
+            <div class="service-icon">👶</div>
+            <h3>Maternity & Child Care</h3>
+            <p>Complete prenatal, delivery, and postnatal care with specialized pediatric services for mothers and children.</p>
+            <ul class="service-features">
+              <li>Prenatal consultations</li>
+              <li>Safe delivery services</li>
+              <li>Postnatal care</li>
+              <li>Child health monitoring</li>
+            </ul>
+            <a href="https://forms.gle/ux42zVptC8yRAHKA9" class="book-btn">Book Appointment</a>
+          </div>
+
+          <!-- Laboratory Services -->
+          <div class="service-card">
+            <div class="service-icon">🔬</div>
+            <h3>Laboratory Services</h3>
+            <p>State-of-the-art diagnostic laboratory with accurate and timely test results to support your treatment plan.</p>
+            <ul class="service-features">
+              <li>Blood tests and analysis</li>
+              <li>Urine and stool examinations</li>
+              <li>Microbiology testing</li>
+              <li>Rapid diagnostic tests</li>
+            </ul>
+            <a href="https://forms.gle/ux42zVptC8yRAHKA9" class="book-btn">Schedule Test</a>
+          </div>
+
+          <!-- Pharmacy -->
+          <div class="service-card">
+            <div class="service-icon">💊</div>
+            <h3>Pharmacy Services</h3>
+            <p>Full-service pharmacy with qualified pharmacists providing medication management and health consultations.</p>
+            <ul class="service-features">
+              <li>Prescription medications</li>
+              <li>Over-the-counter drugs</li>
+              <li>Medication counseling</li>
+              <li>Drug interaction checks</li>
+            </ul>
+            <a href="https://forms.gle/ux42zVptC8yRAHKA9" class="book-btn">Visit Pharmacy</a>
+          </div>
+
+          <!-- Specialized Care -->
+          <div class="service-card">
+            <div class="service-icon">⚕️</div>
+            <h3>Specialized Care</h3>
+            <p>Access to specialist consultations and treatments for complex medical conditions requiring expert care.</p>
+            <ul class="service-features">
+              <li>Cardiology services</li>
+              <li>Gynecological care</li>
+              <li>Orthopedic consultations</li>
+              <li>Mental health support</li>
+            </ul>
+            <a href="https://forms.gle/ux42zVptC8yRAHKA9" class="book-btn">Book Specialist</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Emergency Section -->
+      <section class="emergency-section">
+        <div class="emergency-content">
+          <h2>Medical Emergency?</h2>
+          <p>Our emergency team is available 24/7 to provide immediate medical assistance when you need it most.</p>
+          <a href="tel:+233-xxx-xxxx" class="emergency-phone">📞 Emergency: +233-XXX-XXXX</a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+   <footer>
+
+      <div class="footer-wrapper">
+
+        <a href="#">
+          <img src="./assets/images/SOMPA MENSAH.png" alt="logo" class="footer-brand" width="130">
+        </a>
+
+        <div class="social-link">
+
+          <a href="#">
+            <ion-icon name="logo-twitter"></ion-icon>
+          </a>
+
+          <a href="#">
+            <ion-icon name="logo-instagram"></ion-icon>
+          </a>
+
+          <a href="#">
+            <ion-icon name="logo-facebook"></ion-icon>
+          </a>
+
+          <a href="#">
+            <ion-icon name="logo-youtube"></ion-icon>
+          </a>
+
+        </div>
+
+        <p class="copyright">&copy; Copyright 2025 SOMPA. All Rights Reserved.</p>
+
+      </div>
+
+    </footer>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const navbarNav = document.getElementById('navbar-nav');
+
+    menuToggle.addEventListener('click', () => {
+      navbarNav.classList.toggle('active');
+      menuToggle.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking on a link
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navbarNav.classList.remove('active');
+        menuToggle.classList.remove('active');
+      });
+    });
+
+    // Smooth scrolling for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Add scroll effect to navbar
+    window.addEventListener('scroll', () => {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 100) {
+        navbar.style.background = 'hsla(220, 66%, 72%, 0.95)';
+      } else {
+        navbar.style.background = 'hsla(220, 66%, 72%, 0.99)';
+      }
+    });
+
+    // Intersection Observer for animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+        }
+      });
+    }, observerOptions);
+
+    // Observe service cards
+    document.querySelectorAll('.service-card').forEach(card => {
+      observer.observe(card);
+    });
+
+    // Add loading animation
+    window.addEventListener('load', () => {
+      document.body.style.opacity = '0';
+      document.body.style.transition = 'opacity 0.5s ease';
+      setTimeout(() => {
+        document.body.style.opacity = '1';
+      }, 100);
+    });
+  </script>
+</body>
+
+</html>
