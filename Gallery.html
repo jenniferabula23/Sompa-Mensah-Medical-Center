@@ -25,13 +25,561 @@
     href="https://fonts.googleapis.com/css2?family=Monoton&family=Rubik:wght@300;400;500;600;700;800;900&display=swap"
     rel="stylesheet">
 
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery - Sompa Mensah Medical Center</title>
+
+  <!-- Custom CSS -->
+  <style>
+    /*-----------------------------------*\ 
+      #CUSTOM PROPERTY
+    \*-----------------------------------*/
+
+    :root {
+      --red-orange-crayola: hsl(0, 100%, 66%);
+      --space-cadet: hsl(249, 37%, 19%);
+      --pistachio: hsl(88, 50%, 60%);
+      --cultured: hsl(220, 13%, 95%);
+      --saffron: hsl(45, 91%, 58%);
+      --rhythm: hsl(240, 9%, 51%);
+      --white: hsl(0, 0%, 100%);
+      --light-blue: hsl(200, 70%, 90%);
+      --accent-blue: hsl(200, 80%, 60%);
+
+      --fs-1: 46px;
+      --fs-2: 28px;
+      --fs-3: 18px;
+      --fs-4: 15px;
+      --fs-5: 14px;
+
+      --px: 30px;
+      --py: 60px;
+
+      --default-transition: 0.75s ease;
+    }
+
+    /* Reset and Base Styles */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Rubik", sans-serif;
+      line-height: 1.6;
+      color: var(--space-cadet);
+    }
+
+    .container {
+      max-width: 1440px;
+      margin: auto;
+      background: var(--white);
+      overflow: hidden;
+    }
+
+    /* Header */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      padding: 20px 30px;
+      background: hsla(220, 66%, 72%, 0.99);
+      border-bottom: 1px solid hsla(0, 0%, 0%, 0.05);
+      box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.05);
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+
+    .navbar-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .navbar-nav {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    .nav-link {
+      color: var(--space-cadet);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-link:hover {
+      color: var(--saffron);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--saffron);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .menu-toggle-btn {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+    }
+
+    .line {
+      width: 25px;
+      height: 3px;
+      background: var(--space-cadet);
+      transition: 0.3s;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 150px var(--px) 80px;
+      background: linear-gradient(135deg, var(--light-blue) 0%, var(--cultured) 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,204,0,0.1) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: var(--fs-1);
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--space-cadet);
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    .hero p {
+      font-size: var(--fs-3);
+      color: var(--rhythm);
+      margin-bottom: 30px;
+      opacity: 0;
+      animation: fadeInUp 1s ease 0.3s forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Filter Buttons */
+    .filter-section {
+      padding: 40px var(--px) 20px;
+      background: var(--white);
+    }
+
+    .filter-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .filter-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+
+    .filter-btn {
+      background: var(--cultured);
+      color: var(--space-cadet);
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: var(--fs-5);
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: linear-gradient(135deg, var(--saffron), var(--accent-blue));
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 204, 0, 0.3);
+    }
+
+    /* Gallery Section */
+    .gallery-section {
+      padding: 20px var(--px) var(--py);
+      background: var(--white);
+    }
+
+    .gallery-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .gallery-intro {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .gallery-intro h2 {
+      font-size: var(--fs-2);
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--space-cadet);
+    }
+
+    .gallery-intro p {
+      font-size: var(--fs-4);
+      color: var(--rhythm);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .gallery-item {
+      background: var(--white);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.6s ease forwards;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+    .gallery-item:nth-child(2) { animation-delay: 0.2s; }
+    .gallery-item:nth-child(3) { animation-delay: 0.3s; }
+    .gallery-item:nth-child(4) { animation-delay: 0.4s; }
+    .gallery-item:nth-child(5) { animation-delay: 0.5s; }
+    .gallery-item:nth-child(6) { animation-delay: 0.6s; }
+    .gallery-item:nth-child(7) { animation-delay: 0.7s; }
+    .gallery-item:nth-child(8) { animation-delay: 0.8s; }
+    .gallery-item:nth-child(9) { animation-delay: 0.9s; }
+
+    .gallery-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .gallery-item.hidden {
+      display: none;
+    }
+
+    .gallery-image {
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .gallery-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-image img {
+      transform: scale(1.1);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255, 204, 0, 0.8), rgba(32, 146, 255, 0.8));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .overlay-icon {
+      color: white;
+      font-size: 48px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .gallery-content {
+      padding: 25px;
+    }
+
+    .gallery-category {
+      display: inline-block;
+      background: var(--saffron);
+      color: var(--space-cadet);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 15px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .gallery-title {
+      font-size: var(--fs-3);
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--space-cadet);
+    }
+
+    .gallery-description {
+      color: var(--rhythm);
+      font-size: var(--fs-5);
+      line-height: 1.5;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+      margin: auto;
+      background: var(--white);
+      border-radius: 15px;
+      overflow: hidden;
+      animation: zoomIn 0.3s ease;
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.8); }
+      to { transform: scale(1); }
+    }
+
+    .modal-image {
+      width: 100%;
+      max-height: 70vh;
+      object-fit: cover;
+    }
+
+    .modal-info {
+      padding: 30px;
+    }
+
+    .modal-title {
+      font-size: var(--fs-2);
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--space-cadet);
+    }
+
+    .modal-description {
+      color: var(--rhythm);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      background: rgba(0, 0, 0, 0.5);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease;
+    }
+
+    .close-modal:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--space-cadet);
+      color: var(--cultured);
+      padding: 50px var(--px);
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-logo {
+      width: 80px;
+      margin-bottom: 20px;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      background: var(--saffron);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: var(--space-cadet);
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(255, 204, 0, 0.4);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .navbar-nav {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+
+      .navbar-nav.active {
+        transform: translateX(0);
+      }
+
+      .menu-toggle-btn {
+        display: flex;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .filter-buttons {
+        gap: 10px;
+      }
+
+      .filter-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+
+      .modal-content {
+        max-width: 95%;
+        max-height: 95%;
+      }
+
+      .modal-info {
+        padding: 20px;
+      }
+    }
+  </style>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
-
-  <!--
-    - main container
-  -->
 
   <div class="container">
 
@@ -60,7 +608,7 @@
             </li>
 
             <li>
-              <a href="#services" class="nav-link">Services</a>
+              <a href="enhanced_services_page.html" class="nav-link">Services</a>
             </li>
 
             <li>
@@ -149,301 +697,7 @@
           <img src="./assets/images/ring.svg" alt="ring shape" class="shape shape-4" width="80">
           <img src="./assets/images/ring.svg" alt="ring shape" class="shape shape-5" width="40">
 
-        <div class="products-grid">
-
-          <a href="#">
-
-            <div class="product-card">
-
-              <div class="img-box">
-                <img src="./assets/images/WhatsApp Image 2025-05-05 at 10.45.44 AM.jpeg" alt="product image" class="product-img" width="200" loading="lazy">
-              </div>
-
-              <div class="product-content">
-
-                <div class="wrapper">
-                  
-
-                  <p class="product-price">
-                    <span class="small"></span>
-                  </p>
-                </div>
-
-              </div>
-
-            </div>
-
-          </a>
-
-          <a href="#">
-
-            <div class="product-card">
-
-              <div class="img-box">
-                <img src="./assets/images/WhatsApp-Image-2025-04-23-at-21.40.29.jpeg" alt="product image" class="product-img" width="200" loading="lazy">
-              </div>
-
-              <div class="product-content">
-
-                <div class="wrapper">
-                  
-
-                  <p class="product-price">
-                    <span class="small"></span>
-                  </p>
-                </div>
-
-               <br>
-               <br>
-
-
-              </div>
-
-            </div>
-
-          </a>
-
-          <a href="#">
-
-            <div class="product-card">
-
-              <div class="img-box">
-                <img src="./assets/images/WhatsApp-Image-2025-04-23-at-21.40.29.jpeg" alt="product image" class="product-img" width="200" loading="lazy">
-              </div>
-
-              <div class="product-content">
-
-                <div class="wrapper">
-                  
-
-                  <p class="product-price">
-                    <span class="small"></span>
-                  </p>
-                </div>
-
-
-              </div>
-
-            </div>
-
-          </a>
-
-          <a href="#">
-
-            <div class="product-card">
-
-              <div class="img-box">
-                <img src="./assets/images/WhatsApp-Image-2025-04-23-at-21.40.32.jpeg" alt="product image" class="product-img" width="200" loading="lazy">
-
-                
-              </div>
-
-              <div class="product-content">
-
-                <div class="wrapper">
-
-                  <p class="product-price">
-                    <span class="small"></span>
-                  </p>
-                </div>
-
-              </div>
-
-            </div>
-
-          </a>
-
-          <a href="#">
-
-            <div class="product-card">
-
-              <div class="img-box">
-                <img src="./assets/images/WhatsApp Image 2025-05-05 at 10.45.44 AM.jpeg" alt="product image" class="product-img" width="200" loading="lazy">
-              </div>
-
-              <div class="product-content">
-
-                <div class="wrapper">
-                 
-
-                  <p class="product-price">
-                    <span class="small"></span>
-                  </p>
-                </div>
-
-              </div>
-
-            </div>
-
-          </a>
-
-          <a href="#">
-
-            
-            <div class="product-card">
-
-              <div class="img-box">
-                <img src="./assets/images/WhatsApp-Image-2025-04-23-at-21.40.32.jpeg" alt="product image" class="product-img" width="200" loading="lazy">
-              </div>
-
-              <div class="product-content">
-
-                <div class="wrapper">
-                  <p class="product-price">
-                    <span class="small"></span>
-                  </p>
-                </div>
-              </div>
-
-            </div>
-
-          </a>
-          
-          <a href="#">
-
-            <div class="product-card">
-
-              <div class="img-box">
-                <img src="./assets/images/WhatsApp-Image-2025-04-23-at-21.40.32.jpeg" alt="product image" class="product-img" width="200" loading="lazy">
-
-                
-              </div>
-
-              <div class="product-content">
-
-                <div class="wrapper">
-
-                  <p class="product-price">
-                    <span class="small"></span>
-                  </p>
-                </div>
-
-              </div>
-
-            </div>
-
-          </a>
-
-          <a href="#">
-
-            <div class="product-card">
-
-              <div class="img-box">
-                <img src="./assets/images/WhatsApp Image 2025-05-05 at 10.45.44 AM.jpeg" alt="product image" class="product-img" width="200" loading="lazy">
-              </div>
-
-              <div class="product-content">
-
-                <div class="wrapper">
-                 
-
-                  <p class="product-price">
-                    <span class="small"></span>
-                  </p>
-                </div>
-
-              </div>
-
-            </div>
-
-          </a>
-
-          <a href="#">
-
-            
-            <div class="product-card">
-
-              <div class="img-box">
-                <img src="./assets/images/WhatsApp-Image-2025-04-23-at-21.40.32.jpeg" alt="product image" class="product-img" width="200" loading="lazy">
-              </div>
-
-              <div class="product-content">
-
-                <div class="wrapper">
-                  <p class="product-price">
-                    <span class="small"></span>
-                  </p>
-                </div>
-              </div>
-
-            </div>
-
-          </a>
-
-
-          
-          <a href="#">
-
-            <div class="product-card">
-
-              <div class="img-box">
-                <img src="./assets/images/WhatsApp-Image-2025-04-23-at-21.40.32.jpeg" alt="product image" class="product-img" width="200" loading="lazy">
-
-                
-              </div>
-
-              <div class="product-content">
-
-                <div class="wrapper">
-
-                  <p class="product-price">
-                    <span class="small"></span>
-                  </p>
-                </div>
-
-              </div>
-
-            </div>
-
-          </a>
-
-          <a href="#">
-
-            <div class="product-card">
-
-              <div class="img-box">
-                <img src="./assets/images/WhatsApp Image 2025-05-05 at 10.45.44 AM.jpeg" alt="product image" class="product-img" width="200" loading="lazy">
-              </div>
-
-              <div class="product-content">
-
-                <div class="wrapper">
-                 
-
-                  <p class="product-price">
-                    <span class="small"></span>
-                  </p>
-                </div>
-
-              </div>
-
-            </div>
-
-          </a>
-
-          <a href="#">
-
-            
-            <div class="product-card">
-
-              <div class="img-box">
-                <img src="./assets/images/WhatsApp-Image-2025-04-23-at-21.40.32.jpeg" alt="product image" class="product-img" width="200" loading="lazy">
-              </div>
-
-              <div class="product-content">
-
-                <div class="wrapper">
-                  <p class="product-price">
-                    <span class="small"></span>
-                  </p>
-                </div>
-              </div>
-
-            </div>
-
-          </a>
-        </div>
-
+        
       </section>
 
 
@@ -451,6 +705,202 @@
 
 
 
+
+
+  
+
+  </div>
+
+
+
+
+
+<body>
+  <div class="container">
+    <!-- Header -->
+   
+
+    <main>
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="hero-content">
+          <p>At Sompa Medical Health Centre, we believe that healing begins the moment you walk through our doors. Explore our facilities and see the warm, welcoming environment designed to make every visit as comfortable as possible.</p>
+        </div>
+      </section>
+
+      <!-- Filter Section -->
+      <section class="filter-section">
+        <div class="filter-container">
+          <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="facilities">Facilities</button>
+            <button class="filter-btn" data-filter="wards">Wards</button>
+            <button class="filter-btn" data-filter="equipment">Equipment</button>
+            <button class="filter-btn" data-filter="exterior">Exterior</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Gallery Section -->
+      <section class="gallery-section">
+        <div class="gallery-container">
+          <div class="gallery-intro">
+            <h2>Our Healthcare Environment</h2>
+            <p>From our beautifully furnished waiting areas to our spotless consultation rooms, every space reflects our commitment to both quality and care.</p>
+          </div>
+
+          <div class="gallery-grid">
+            <!-- Laboratory -->
+            <div class="gallery-item" data-category="facilities">
+              <div class="gallery-image">
+                <img src="./assets/images/WhatsApp Image 2025-05-30 at 6.56.21 AM.jpeg" alt="Laboratory Facility" loading="lazy">
+                <div class="gallery-overlay">
+                  <div class="overlay-icon">🔬</div>
+                </div>
+              </div>
+              <div class="gallery-content">
+                <span class="gallery-category">Facilities</span>
+                <h3 class="gallery-title">Modern Laboratory</h3>
+                <p class="gallery-description">State-of-the-art laboratory equipped with the latest diagnostic equipment for accurate and timely test results.</p>
+              </div>
+            </div>
+
+            <!-- Labour Ward -->
+            <div class="gallery-item" data-category="wards">
+              <div class="gallery-image">
+                <img src="./assets/images/WhatsApp Image 2025-05-30 at 6.56.30 AM.jpeg" alt="Labour Ward" loading="lazy">
+                <div class="gallery-overlay">
+                  <div class="overlay-icon">👶</div>
+                </div>
+              </div>
+              <div class="gallery-content">
+                <span class="gallery-category">Wards</span>
+                <h3 class="gallery-title">Labour Ward</h3>
+                <p class="gallery-description">Comfortable and fully equipped labour ward designed to provide a safe and welcoming environment for childbirth.</p>
+              </div>
+            </div>
+
+            <!-- Male Ward -->
+            <div class="gallery-item" data-category="wards">
+              <div class="gallery-image">
+                <img src="./assets/images/WhatsApp Image 2025-05-30 at 6.56.28 AM (1).jpeg" alt="Male Ward" loading="lazy">
+                <div class="gallery-overlay">
+                  <div class="overlay-icon">🏥</div>
+                </div>
+              </div>
+              <div class="gallery-content">
+                <span class="gallery-category">Wards</span>
+                <h3 class="gallery-title">Male Ward</h3>
+                <p class="gallery-description">Spacious and comfortable male ward with modern amenities to ensure patient comfort and privacy.</p>
+              </div>
+            </div>
+
+            <!-- Pharmacy -->
+            <div class="gallery-item" data-category="facilities">
+              <div class="gallery-image">
+                <img src="./assets/images/WhatsApp Image 2025-05-30 at 6.56.28 AM.jpeg" alt="Pharmacy" loading="lazy">
+                <div class="gallery-overlay">
+                  <div class="overlay-icon">💊</div>
+                </div>
+              </div>
+              <div class="gallery-content">
+                <span class="gallery-category">Facilities</span>
+                <h3 class="gallery-title">Full-Service Pharmacy</h3>
+                <p class="gallery-description">Complete pharmacy services with qualified pharmacists providing medication management and health consultations.</p>
+              </div>
+            </div>
+
+            <!-- Gynecological Room -->
+            <div class="gallery-item" data-category="facilities">
+              <div class="gallery-image">
+                <img src="./assets/images/WhatsApp Image 2025-05-30 at 6.56.27 AM.jpeg" alt="Gynecological Room" loading="lazy">
+                <div class="gallery-overlay">
+                  <div class="overlay-icon">🩺</div>
+                </div>
+              </div>
+              <div class="gallery-content">
+                <span class="gallery-category">Facilities</span>
+                <h3 class="gallery-title">Gynecological Suite</h3>
+                <p class="gallery-description">Private and comfortable gynecological examination room with modern equipment for women's health services.</p>
+              </div>
+            </div>
+
+            <!-- Main Building Exterior -->
+            <div class="gallery-item" data-category="exterior">
+              <div class="gallery-image">
+                <img src="./assets/images/WhatsApp-Image-2025-04-23-at-21.40.32.jpeg" alt="Main Building" loading="lazy">
+                <div class="gallery-overlay">
+                  <div class="overlay-icon">🏢</div>
+                </div>
+              </div>
+              <div class="gallery-content">
+                <span class="gallery-category">Exterior</span>
+                <h3 class="gallery-title">Main Building</h3>
+                <p class="gallery-description">Our welcoming main building designed to create a comfortable and accessible healthcare environment.</p>
+              </div>
+            </div>
+
+            <!-- Reception Area -->
+            <div class="gallery-item" data-category="facilities">
+              <div class="gallery-image">
+                <img src="./assets/images/WhatsApp Image 2025-05-05 at 10.45.44 AM.jpeg" alt="Reception Area" loading="lazy">
+                <div class="gallery-overlay">
+                  <div class="overlay-icon">🏨</div>
+                </div>
+              </div>
+              <div class="gallery-content">
+                <span class="gallery-category">Facilities</span>
+                <h3 class="gallery-title">Reception & Waiting Area</h3>
+                <p class="gallery-description">Spacious reception area with comfortable seating and a friendly atmosphere to welcome our patients.</p>
+              </div>
+            </div>
+
+            <!-- Consultation Room -->
+            <div class="gallery-item" data-category="facilities">
+              <div class="gallery-image">
+                <img src="./assets/images/WhatsApp-Image-2025-04-23-at-21.40.29.jpeg" alt="Consultation Room" loading="lazy">
+                <div class="gallery-overlay">
+                  <div class="overlay-icon">👨‍⚕️</div>
+                </div>
+              </div>
+              <div class="gallery-content">
+                <span class="gallery-category">Facilities</span>
+                <h3 class="gallery-title">Consultation Room</h3>
+                <p class="gallery-description">Private consultation rooms equipped with modern medical equipment for thorough patient examinations.</p>
+              </div>
+            </div>
+
+            <!-- Medical Equipment -->
+            <div class="gallery-item" data-category="equipment">
+              <div class="gallery-image">
+                <img src="./assets/images/pic1.jpg" alt="Medical Equipment" loading="lazy">
+                <div class="gallery-overlay">
+                  <div class="overlay-icon">⚕️</div>
+                </div>
+              </div>
+              <div class="gallery-content">
+                <span class="gallery-category">Equipment</span>
+                <h3 class="gallery-title">Advanced Medical Equipment</h3>
+                <p class="gallery-description">State-of-the-art medical equipment ensuring accurate diagnoses and effective treatments for our patients.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Modal -->
+    <div id="imageModal" class="modal">
+      <span class="close-modal">&times;</span>
+      <div class="modal-content">
+        <img class="modal-image" id="modalImage">
+        <div class="modal-info">
+          <h3 class="modal-title" id="modalTitle"></h3>
+          <p class="modal-description" id="modalDescription"></p>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
     <!--
@@ -491,15 +941,27 @@
 
     </footer>
 
-  </div>
+  <!-- JavaScript -->
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const navbarNav = document.getElementById('navbar-nav');
 
+    menuToggle.addEventListener('click', () => {
+      navbarNav.classList.toggle('active');
+      menuToggle.classList.toggle('active');
+    });
 
+    // Close mobile menu when clicking on a link
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach
 
 
 
   <!--
     - custom js link
   -->
+  </script>
   <script src="./assets/js/foodhub.js"></script>
 
   <!--
@@ -508,6 +970,7 @@
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
+
+
 </body>
 
-</html>
