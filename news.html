@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News & Updates - Sompa Mensah Medical Center</title>
+
+  <!-- Custom CSS -->
+  <style>
+    /*-----------------------------------*\ 
+      #CUSTOM PROPERTY
+    \*-----------------------------------*/
+
+    :root {
+      --red-orange-crayola: hsl(0, 100%, 66%);
+      --space-cadet: hsl(249, 37%, 19%);
+      --pistachio: hsl(88, 50%, 60%);
+      --cultured: hsl(220, 13%, 95%);
+      --saffron: hsl(45, 91%, 58%);
+      --rhythm: hsl(240, 9%, 51%);
+      --white: hsl(0, 0%, 100%);
+      --light-blue: hsl(200, 70%, 90%);
+      --accent-blue: hsl(200, 80%, 60%);
+      --light-green: hsl(142, 70%, 90%);
+      --success-green: hsl(142, 70%, 49%);
+
+      --fs-1: 46px;
+      --fs-2: 28px;
+      --fs-3: 18px;
+      --fs-4: 15px;
+      --fs-5: 14px;
+
+      --px: 30px;
+      --py: 60px;
+
+      --default-transition: 0.75s ease;
+    }
+
+    /* Reset and Base Styles */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Rubik", sans-serif;
+      line-height: 1.6;
+      color: var(--space-cadet);
+    }
+
+    .container {
+      max-width: 1440px;
+      margin: auto;
+      background: var(--white);
+      overflow: hidden;
+    }
+
+    /* Header */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      padding: 20px 30px;
+      background: hsla(220, 66%, 72%, 0.99);
+      border-bottom: 1px solid hsla(0, 0%, 0%, 0.05);
+      box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.05);
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+
+    .navbar-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .navbar-nav {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    .nav-link {
+      color: var(--space-cadet);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-link:hover {
+      color: var(--saffron);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--saffron);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .menu-toggle-btn {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+    }
+
+    .line {
+      width: 25px;
+      height: 3px;
+      background: var(--space-cadet);
+      transition: 0.3s;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 150px var(--px) 80px;
+      background: linear-gradient(135deg, var(--light-blue) 0%, var(--cultured) 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,204,0,0.1) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: var(--fs-1);
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--space-cadet);
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    .hero p {
+      font-size: var(--fs-3);
+      color: var(--rhythm);
+      margin-bottom: 30px;
+      opacity: 0;
+      animation: fadeInUp 1s ease 0.3s forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Breaking News Ticker */
+    .breaking-news {
+      background: linear-gradient(90deg, var(--red-orange-crayola), #ff6b47);
+      color: white;
+      padding: 15px 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .breaking-news-content {
+      display: flex;
+      align-items: center;
+      animation: scroll-left 30s linear infinite;
+      white-space: nowrap;
+    }
+
+    .breaking-label {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: 600;
+      margin-right: 20px;
+      flex-shrink: 0;
+    }
+
+    @keyframes scroll-left {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* News Categories */
+    .categories-section {
+      padding: 40px var(--px) 20px;
+      background: var(--white);
+    }
+
+    .categories-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .category-btn {
+      padding: 12px 25px;
+      border: 2px solid var(--cultured);
+      border-radius: 25px;
+      background: var(--white);
+      color: var(--space-cadet);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .category-btn:hover,
+    .category-btn.active {
+      background: var(--saffron);
+      border-color: var(--saffron);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    /* Featured News */
+    .featured-news {
+      padding: var(--py) var(--px);
+      background: var(--cultured);
+    }
+
+    .featured-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: var(--fs-2);
+      font-weight: 600;
+      margin-bottom: 40px;
+      text-align: center;
+      color: var(--space-cadet);
+    }
+
+    .featured-article {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+      background: var(--white);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      margin-bottom: 40px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .featured-image {
+      position: relative;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+    .featured-image img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .featured-article:hover .featured-image img {
+      transform: scale(1.05);
+    }
+
+    .featured-badge {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: var(--red-orange-crayola);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: var(--fs-5);
+      font-weight: 600;
+    }
+
+    .featured-content h2 {
+      font-size: var(--fs-2);
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: var(--space-cadet);
+      line-height: 1.3;
+    }
+
+    .featured-meta {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+      font-size: var(--fs-5);
+      color: var(--rhythm);
+    }
+
+    .featured-meta span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .featured-excerpt {
+      color: var(--rhythm);
+      margin-bottom: 25px;
+      line-height: 1.7;
+    }
+
+    .read-more {
+      background: linear-gradient(135deg, var(--saffron), var(--accent-blue));
+      color: white;
+      padding: 12px 30px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .read-more:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(255, 204, 0, 0.3);
+    }
+
+    /* News Grid */
+    .news-grid-section {
+      padding: var(--py) var(--px);
+      background: var(--white);
+    }
+
+    .news-grid-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+
+    .news-card {
+      background: var(--white);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .news-card:nth-child(1) { animation-delay: 0.1s; }
+    .news-card:nth-child(2) { animation-delay: 0.2s; }
+    .news-card:nth-child(3) { animation-delay: 0.3s; }
+    .news-card:nth-child(4) { animation-delay: 0.4s; }
+    .news-card:nth-child(5) { animation-delay: 0.5s; }
+    .news-card:nth-child(6) { animation-delay: 0.6s; }
+
+    .news-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .news-image {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .news-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .news-card:hover .news-image img {
+      transform: scale(1.1);
+    }
+
+    .news-category {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      padding: 6px 12px;
+      border-radius: 15px;
+      font-size: 12px;
+      font-weight: 600;
+      color: white;
+    }
+
+    .category-health { background: var(--success-green); }
+    .category-announcement { background: var(--accent-blue); }
+    .category-community { background: var(--saffron); }
+    .category-research { background: var(--pistachio); }
+
+    .news-content {
+      padding: 25px;
+    }
+
+    .news-title {
+      font-size: var(--fs-3);
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--space-cadet);
+      line-height: 1.4;
+    }
+
+    .news-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      font-size: var(--fs-5);
+      color: var(--rhythm);
+    }
+
+    .news-excerpt {
+      color: var(--rhythm);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .news-link {
+      color: var(--saffron);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: var(--fs-5);
+      transition: color 0.3s ease;
+    }
+
+    .news-link:hover {
+      color: var(--accent-blue);
+    }
+
+    /* Health Tips Section */
+    .health-tips {
+      padding: var(--py) var(--px);
+      background: var(--light-green);
+    }
+
+    .health-tips-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .tip-card {
+      background: var(--white);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .tip-card:nth-child(1) { animation-delay: 0.1s; }
+    .tip-card:nth-child(2) { animation-delay: 0.2s; }
+    .tip-card:nth-child(3) { animation-delay: 0.3s; }
+    .tip-card:nth-child(4) { animation-delay: 0.4s; }
+
+    .tip-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    }
+
+    .tip-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--success-green), var(--pistachio));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: white;
+      margin: 0 auto 20px;
+    }
+
+    .tip-card h3 {
+      font-size: var(--fs-3);
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--space-cadet);
+    }
+
+    .tip-card p {
+      color: var(--rhythm);
+      line-height: 1.6;
+    }
+
+    /* Newsletter Section */
+    .newsletter {
+      padding: var(--py) var(--px);
+      background: linear-gradient(135deg, var(--space-cadet), var(--rhythm));
+      color: var(--white);
+      text-align: center;
+    }
+
+    .newsletter-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .newsletter h2 {
+      font-size: var(--fs-2);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .newsletter p {
+      font-size: var(--fs-3);
+      margin-bottom: 40px;
+      opacity: 0.9;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 15px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      padding: 15px 20px;
+      border: none;
+      border-radius: 25px;
+      font-size: var(--fs-4);
+      outline: none;
+    }
+
+    .newsletter-btn {
+      background: var(--saffron);
+      color: var(--space-cadet);
+      border: none;
+      padding: 15px 30px;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .newsletter-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 204, 0, 0.4);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--space-cadet);
+      color: var(--cultured);
+      padding: 50px var(--px);
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-logo {
+      width: 80px;
+      margin-bottom: 20px;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      background: var(--saffron);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: var(--space-cadet);
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(255, 204, 0, 0.4);
+    }
+
+    /* Load More Button */
+    .load-more-container {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .load-more-btn {
+      background: linear-gradient(135deg, var(--saffron), var(--accent-blue));
+      color: white;
+      border: none;
+      padding: 15px 40px;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: var(--fs-4);
+    }
+
+    .load-more-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(255, 204, 0, 0.3);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .navbar-nav {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+
+      .navbar-nav.active {
+        transform: translateX(0);
+      }
+
+      .menu-toggle-btn {
+        display: flex;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .featured-article {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 30px 20px;
+      }
+
+      .news-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .tips-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .categories-container {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 10px;
+      }
+
+      .category-btn {
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+    }
+  </style>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <nav class="navbar">
+        <div class="navbar-wrapper">
+          <a href="index.html">
+            <img src="./assets/images/SOMPA MENSAH.png" alt="Sompa Mensah Medical Center Logo" width="120">
+          </a>
+
+          <ul class="navbar-nav" id="navbar-nav">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="services.html" class="nav-link">Services</a></li>
+            <li><a href="https://forms.gle/ux42zVptC8yRAHKA9" class="nav-link">Appointment</a></li>
+            <li><a href="Gallery.html" class="nav-link">Gallery</a></li>
+            <li><a href="news.html" class="nav-link">News</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+          </ul>
+
+          <button class="menu-toggle-btn" id="menu-toggle">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Breaking News Ticker -->
+      <section class="breaking-news">
+        <div class="breaking-news-content">
+          <span class="breaking-label">🚨 BREAKING</span>
+          <span>New COVID-19 vaccination schedule available • Free health screenings every Saturday • Mental health awareness week starting Monday • Emergency services now 24/7</span>
+        </div>
+      </section>
+
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="hero-content">
+          <h1>Latest News & Health Updates</h1>
+          <p>Stay informed about our latest medical services, health tips, community outreach programs, and important healthcare announcements from Sompa Mensah Medical Center.</p>
+        </div>
+      </section>
+
+      <!-- News Categories -->
+      <section class="categories-section">
+        <div class="categories-container">
+          <button class="category-btn active" data-category="all">All News</button>
+          <button class="category-btn" data-category="health">Health Tips</button>
+          <button class="category-btn" data-category="announcement">Announcements</button>
+          <button class="category-btn" data-category="community">Community</button>
+          <button class="category-btn" data-category="research">Medical Research</button>
+        </div>
+      </section>
+
+      <!-- Featured Article -->
+      <section class="featured-news">
+        <div class="featured-container">
+          <h2 class="section-title">Featured Story</h2>
+          
+          <article class="featured-article">
+            <div class="featured-image">
+              <img src="./assets/images/WhatsApp Image 2025-07-29 at 21.51.57_c7d4e08d.jpg" alt="Health Initiative Launch" loading="lazy">
+              <span class="featured-badge">FEATURED</span>
+            </div>
+            <div class="featured-content">
+              <h2>Sompa Mensah Medical Center Offers Free Health Screening at ARISE Concert 2025 </h2>
+              <div class="featured-meta">
+                <span>📅 January 25, 2025</span>
+                <span>👤 Mary</span>
+                <span>📖 5 min read</span>
+              </div>
+              <p class="featured-excerpt">
+               On Sunday, July 27, 2025, Sompa Mensah Medical Center organized a free health screening at the Calvary Charismatic Centre in Kumasi. The initiative was part of the “ARISE Concert 2025,” a gospel event that also marked the launch of Minister OJ’s new single, Adom Ahyasie.
+              </p>
+              <a href="https://leakyghana.com/sompa-mensah-medical-center-offers-free-health-screening-at-arise-concert-2025/" class="read-more">Read Full Article</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- News Grid -->
+      <section class="news-grid-section">
+        <div class="news-grid-container">
+          <h2 class="section-title">Recent News & Updates</h2>
+          
+          <div class="news-grid">
+            <article class="news-card" data-category="announcement">
+              <div class="news-image">
+                <img src="./assets/images/WhatsApp-Image-2025-04-23-at-21.40.32.jpeg" alt="New Equipment" loading="lazy">
+                <span class="news-category category-announcement">ANNOUNCEMENT</span>
+              </div>
+              <div class="news-content">
+                <h3 class="news-title">Advanced Diagnostic Equipment Now Available</h3>
+                <div class="news-meta">
+                  <span>📅 Jan 20, 2025</span>
+                  <span>⏱️ 3 min read</span>
+                </div>
+                <p class="news-excerpt">
+                  We're excited to announce the arrival of state-of-the-art diagnostic equipment that will enhance our ability to provide accurate and timely medical diagnoses for our patients.
+                </p>
+                <a href="#" class="news-link">Read More →</a>
+              </div>
+            </article>
+
+            <article class="news-card" data-category="health">
+              <div class="news-image">
+                <img src="./assets/images/WhatsApp-Image-2025-04-23-at-21.40.29.jpeg" alt="Health Tips" loading="lazy">
+                <span class="news-category category-health">HEALTH TIPS</span>
+              </div>
+              <div class="news-content">
+                <h3 class="news-title">5 Essential Tips for Heart Health This Year</h3>
+                <div class="news-meta">
+                  <span>📅 Jan 18, 2025</span>
+                  <span>⏱️ 4 min read</span>
+                </div>
+                <p class="news-excerpt">
+                  Heart disease remains a leading health concern. Our cardiologist shares five practical tips to keep your heart healthy and reduce your risk of cardiovascular disease.
+                </p>
+                <a href="#" class="news-link">Read More →</a>
+              </div>
+            </article>
+
+            <article class="news-card" data-category="community">
+              <div class="news-image">
+                <img src="./assets/images/WhatsApp Image 2025-05-30 at 6.56.21 AM.jpeg" alt="Community Outreach" loading="lazy">
+                <span class="news-category category-community">COMMUNITY</span>
+              </div>
+              <div class="news-content">
+                <h3 class="news-title">Free Health Screening Program Reaches 500 Residents</h3>
+                <div class="news-meta">
+                  <span>📅 Jan 15, 2025</span>
+                  <span>⏱️ 2 min read</span>
+                </div>
+                <p class="news-excerpt">
+                  Our monthly community health screening program has successfully screened over 500 local residents, detecting early signs of diabetes, hypertension, and other conditions.
+                </p>
+                <a href="#" class="news-link">Read More →</a>
+              </div>
+            </article>
+
+            <article class="news-card" data-category="research">
+              <div class="news-image">
+                <img src="./assets/images/WhatsApp Image 2025-05-30 at 6.56.30 AM.jpeg" alt="Medical Research" loading="lazy">
+                <span class="news-category category-research">RESEARCH</span>
+              </div>
+              <div class="news-content">
+                <h3 class="news-title">Groundbreaking Study on Local Health Patterns</h3>
+                <div class="news-meta">
+                  <span>📅 Jan 12, 2025</span>
+                  <span>⏱️ 6 min read</span>
+                </div>
+                <p class="news-excerpt">
+                  Our medical team has completed a comprehensive study on health patterns in the Ashanti region, revealing important insights for preventive healthcare strategies.
+                </p>
+                <a href="#" class="news-link">Read More →</a>
+              </div>
+            </article>
+
+            <article class="news-card" data-
