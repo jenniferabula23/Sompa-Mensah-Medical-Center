@@ -57,7 +57,7 @@
             </li>
 
             <li>
-              <a href="services.html" class="nav-link">Services</a>
+              <a href="enhanced_services_page.html" class="nav-link">Services</a>
             </li>
 
             <li>
@@ -76,10 +76,7 @@
 
           <div class="navbar-btn-group">
 
-            <button class="shopping-cart-btn">
-              <img src="./assets/images/cart.svg" alt="shopping cart icon" width="18">
-              <span class="count">5</span>
-            </button>
+            
 
             <button class="menu-toggle-btn">
               <span class="line one"></span>
@@ -225,7 +222,912 @@
 
 
 
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Sompa Mensah Medical Center</title>
+
+  <!-- Custom CSS -->
+  <style>
+    /*-----------------------------------*\ 
+      #CUSTOM PROPERTY
+    \*-----------------------------------*/
+
+    :root {
+      --red-orange-crayola: hsl(0, 100%, 66%);
+      --space-cadet: hsl(249, 37%, 19%);
+      --pistachio: hsl(88, 50%, 60%);
+      --cultured: hsl(220, 13%, 95%);
+      --saffron: hsl(45, 91%, 58%);
+      --rhythm: hsl(240, 9%, 51%);
+      --white: hsl(0, 0%, 100%);
+      --light-blue: hsl(200, 70%, 90%);
+      --accent-blue: hsl(200, 80%, 60%);
+
+      --fs-1: 46px;
+      --fs-2: 28px;
+      --fs-3: 18px;
+      --fs-4: 15px;
+      --fs-5: 14px;
+
+      --px: 30px;
+      --py: 60px;
+
+      --default-transition: 0.75s ease;
+    }
+
+    /* Reset and Base Styles */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Rubik", sans-serif;
+      line-height: 1.6;
+      color: var(--space-cadet);
+    }
+
+    .container {
+      max-width: 1440px;
+      margin: auto;
+      background: var(--white);
+      overflow: hidden;
+    }
+
+    /* Header */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      padding: 20px 30px;
+      background: hsla(220, 66%, 72%, 0.99);
+      border-bottom: 1px solid hsla(0, 0%, 0%, 0.05);
+      box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.05);
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+
+    .navbar-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .navbar-nav {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    .nav-link {
+      color: var(--space-cadet);
+      text-decoration: none;
+      font-weight: 300;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-link:hover {
+      color: var(--saffron);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--saffron);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .menu-toggle-btn {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+    }
+
+    .line {
+      width: 25px;
+      height: 3px;
+      background: var(--space-cadet);
+      transition: 0.3s;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 150px var(--px) 80px;
+      background: linear-gradient(135deg, var(--light-blue) 0%, var(--cultured) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,204,0,0.1) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .hero-container {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-content h1 {
+      font-size: var(--fs-1);
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--space-cadet);
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    .hero-content p {
+      font-size: var(--fs-3);
+      color: var(--rhythm);
+      margin-bottom: 30px;
+      opacity: 0;
+      animation: fadeInUp 1s ease 0.3s forwards;
+    }
+
+    .hero-image {
+      position: relative;
+      opacity: 0;
+      animation: fadeInRight 1s ease 0.5s forwards;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .experience-badge {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      background: var(--white);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .experience-number {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--saffron);
+      display: block;
+    }
+
+    .experience-text {
+      font-size: var(--fs-5);
+      color: var(--rhythm);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* Mission Vision Section */
+    .mission-vision {
+      padding: var(--py) var(--px);
+      background: var(--white);
+    }
+
+    .mission-vision-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+
+    .mission-card, .vision-card {
+      padding: 40px;
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .mission-card {
+      background: linear-gradient(135deg, var(--saffron) 0%, rgba(255, 204, 0, 0.1) 100%);
+      animation-delay: 0.2s;
+    }
+
+    .vision-card {
+      background: linear-gradient(135deg, var(--accent-blue) 0%, rgba(32, 146, 255, 0.1) 100%);
+      animation-delay: 0.4s;
+    }
+
+    .mission-card::before, .vision-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent 49%, rgba(255, 255, 255, 0.1) 50%, transparent 51%);
+      animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .card-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-title {
+      font-size: var(--fs-2);
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--space-cadet);
+    }
+
+    .card-text {
+      color: var(--rhythm);
+      line-height: 1.7;
+      font-size: var(--fs-4);
+    }
+
+    /* Values Section */
+    .values-section {
+      padding: var(--py) var(--px);
+      background: var(--cultured);
+    }
+
+    .values-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: var(--fs-2);
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: var(--space-cadet);
+    }
+
+    .section-subtitle {
+      font-size: var(--fs-4);
+      color: var(--rhythm);
+      margin-bottom: 50px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .value-card {
+      background: var(--white);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.6s ease forwards;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .value-card:nth-child(1) { animation-delay: 0.1s; }
+    .value-card:nth-child(2) { animation-delay: 0.2s; }
+    .value-card:nth-child(3) { animation-delay: 0.3s; }
+    .value-card:nth-child(4) { animation-delay: 0.4s; }
+    .value-card:nth-child(5) { animation-delay: 0.5s; }
+
+    .value-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--saffron), var(--accent-blue));
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .value-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .value-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .value-number {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--saffron);
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .value-card h3 {
+      font-size: var(--fs-3);
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--space-cadet);
+    }
+
+    .value-card p {
+      color: var(--rhythm);
+      line-height: 1.6;
+    }
+
+    /* Team Section */
+    .team-section {
+      padding: var(--py) var(--px);
+      background: var(--white);
+    }
+
+    .team-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+      margin-top: 50px;
+    }
+
+    .team-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .team-card:nth-child(1) { animation-delay: 0.1s; }
+    .team-card:nth-child(2) { animation-delay: 0.2s; }
+    .team-card:nth-child(3) { animation-delay: 0.3s; }
+
+    .team-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    }
+
+    .team-image {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      overflow: hidden;
+      border: 4px solid var(--saffron);
+    }
+
+    .team-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .team-name {
+      font-size: var(--fs-3);
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--space-cadet);
+    }
+
+    .team-role {
+      color: var(--saffron);
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+
+    .team-bio {
+      color: var(--rhythm);
+      line-height: 1.6;
+      font-size: var(--fs-5);
+    }
+
+    /* Stats Section */
+    .stats-section {
+      padding: var(--py) var(--px);
+      background: linear-gradient(135deg, var(--space-cadet), var(--rhythm));
+      color: var(--white);
+    }
+
+    .stats-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      text-align: center;
+    }
+
+    .stat-item {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .stat-item:nth-child(1) { animation-delay: 0.1s; }
+    .stat-item:nth-child(2) { animation-delay: 0.2s; }
+    .stat-item:nth-child(3) { animation-delay: 0.3s; }
+    .stat-item:nth-child(4) { animation-delay: 0.4s; }
+
+    .stat-number {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--saffron);
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .stat-label {
+      font-size: var(--fs-4);
+      color: var(--cultured);
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: var(--py) var(--px);
+      background: linear-gradient(135deg, var(--saffron) 0%, var(--accent-blue) 100%);
+      text-align: center;
+      color: var(--white);
+    }
+
+    .cta-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .cta-section h2 {
+      font-size: var(--fs-2);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .cta-section p {
+      font-size: var(--fs-3);
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .cta-btn {
+      background: var(--white);
+      color: var(--space-cadet);
+      padding: 15px 40px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: var(--fs-4);
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--space-cadet);
+      color: var(--cultured);
+      padding: 50px var(--px);
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-logo {
+      width: 80px;
+      margin-bottom: 20px;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      background: var(--saffron);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: var(--space-cadet);
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(255, 204, 0, 0.4);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .navbar-nav {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+
+      .navbar-nav.active {
+        transform: translateX(0);
+      }
+
+      .menu-toggle-btn {
+        display: flex;
+      }
+
+      .hero-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .mission-vision-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .values-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+      }
+    }
+  </style>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <nav class="navbar">
+        <div class="navbar-wrapper">
+          <a href="index.html">
+            <img src="./assets/images/SOMPA MENSAH.png" alt="Sompa Mensah Medical Center Logo" width="120">
+          </a>
+
+          <ul class="navbar-nav" id="navbar-nav">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="enhanced_services_page.html" class="nav-link">Services</a></li>
+            <li><a href="https://forms.gle/ux42zVptC8yRAHKA9" class="nav-link">Appointment</a></li>
+            <li><a href="news.html" class="nav-link">News</a></li>
+            <li><a href="Gallery.html" class="nav-link">Gallery</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+          </ul>
+
+          <button class="menu-toggle-btn" id="menu-toggle">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+     
+
+      <!-- Mission & Vision -->
+      <section class="mission-vision">
+        <div class="mission-vision-container">
+          <div class="mission-card">
+            <div class="card-icon">🎯</div>
+            <h2 class="card-title">Our Mission</h2>
+            <p class="card-text">To promote quality and affordable healthcare through clinical practice and research by a highly skilled staff in a friendly environment. We focus on patient-centered care, ensuring access to high-quality healthcare services while embracing innovative approaches and fostering partnerships with healthcare stakeholders.</p>
+          </div>
+          
+          <div class="vision-card">
+            <div class="card-icon">👁️</div>
+            <h2 class="card-title">Our Vision</h2>
+            <p class="card-text">To deliver quality, cost-effective and client-centered healthcare services in a secured and serene environment. We envision being the leading healthcare provider in our community, known for excellence in patient care and medical innovation.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Core Values -->
+      <section class="values-section">
+        <div class="values-container">
+          <h2 class="section-title">Our Core Values</h2>
+          <p class="section-subtitle">These fundamental principles guide everything we do and shape how we interact with our patients, families, and community.</p>
+
+          <div class="values-grid">
+            <div class="value-card">
+              <span class="value-number">01</span>
+              <h3>Compassion & Respect</h3>
+              <p>Every patient is treated with kindness and dignity, honoring their concerns, privacy, and cultural background.</p>
+            </div>
+
+            <div class="value-card">
+              <span class="value-number">02</span>
+              <h3>Professional Excellence</h3>
+              <p>Our clinicians maintain the highest standards of skill and knowledge through regular training and continuing professional development.</p>
+            </div>
+
+            <div class="value-card">
+              <span class="value-number">03</span>
+              <h3>Innovation</h3>
+              <p>We continuously seek better ways to care for our patients, embracing new medical advances, technology, and best practices.</p>
+            </div>
+
+            <div class="value-card">
+              <span class="value-number">04</span>
+              <h3>Community Focus</h3>
+              <p>We are committed to giving back and promoting health beyond our walls through outreach programs and health education.</p>
+            </div>
+
+            <div class="value-card">
+              <span class="value-number">05</span>
+              <h3>Integrity</h3>
+              <p>We operate with honesty, transparency, and ethical practices in all our interactions and medical decisions.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Statistics -->
+      <section class="stats-section">
+        <div class="stats-container">
+          <div class="stat-item">
+            <span class="stat-number">500+</span>
+            <span class="stat-label">Patients Served</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">15+</span>
+            <span class="stat-label">Years Experience</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">24/7</span>
+            <span class="stat-label">Emergency Care</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">22+</span>
+            <span class="stat-label">Medical Services</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Call to Action -->
+      <section class="cta-section">
+        <div class="cta-container">
+          <h2>Ready to Experience Quality Healthcare?</h2>
+          <p>Join our family of satisfied patients and experience healthcare that truly cares about your wellbeing.</p>
+          <a href="https://forms.gle/ux42zVptC8yRAHKA9" class="cta-btn">Book Your Appointment Today</a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const navbarNav = document.getElementById('navbar-nav');
+
+    menuToggle.addEventListener('click', () => {
+      navbarNav.classList.toggle('active');
+      menuToggle.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking on a link
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navbarNav.classList.remove('active');
+        menuToggle.classList.remove('active');
+      });
+    });
+
+    // Counter animation for stats
+    function animateCounter(element, target, duration = 2000) {
+      let start = 0;
+      const increment = target / (duration / 16);
+      
+      function updateCounter() {
+        start += increment;
+        if (start < target) {
+          element.textContent = Math.floor(start) + (target >= 1000 ? '+' : '');
+          requestAnimationFrame(updateCounter);
+        } else {
+          element.textContent = target + (target >= 1000 ? '+' : '');
+        }
+      }
+      
+      updateCounter();
+    }
+
+    // Intersection Observer for animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+          
+          // Animate counters when stats section is visible
+          if (entry.target.classList.contains('stats-section')) {
+            const statNumbers = entry.target.querySelectorAll('.stat-number');
+            statNumbers.forEach(stat => {
+              const text = stat.textContent;
+              if (text.includes('1000+')) {
+                animateCounter(stat, 1000);
+              } else if (text.includes('15+')) {
+                animateCounter(stat, 15);
+              } else if (text.includes('24/7')) {
+                stat.textContent = '24/7';
+              } else if (text.includes('10+')) {
+                animateCounter(stat, 10);
+              }
+            });
+          }
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements for animation
+    document.querySelectorAll('.value-card, .team-card, .stat-item, .stats-section').forEach(card => {
+      observer.observe(card);
+    });
+
+    // Add scroll effect to navbar
+    window.addEventListener('scroll', () => {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 100) {
+        navbar.style.background = 'hsla(220, 66%, 72%, 0.95)';
+      } else {
+        navbar.style.background = 'hsla(220, 66%, 72%, 0.99)';
+      }
+    });
+
+    // Smooth scrolling for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Add loading animation
+    window.addEventListener('load', () => {
+      document.body.style.opacity = '0';
+      document.body.style.transition = 'opacity 0.5s ease';
+      setTimeout(() => {
+        document.body.style.opacity = '1';
+      }, 100);
+    });
+  </script>
+</body>
+
+</html>
 
     <!--
       - #FOOTER
