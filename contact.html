@@ -646,7 +646,7 @@
 
       <!-- Contact Section -->
       <section class="contact-section">
-        <div class="contact-container">
+      
           <!-- Contact Information -->
           <div class="contact-info">
             <h2 class="section-title">Contact Information</h2>
@@ -656,7 +656,8 @@
               <div class="contact-icon">📍</div>
               <div class="contact-details">
                 <h3>Our Location</h3>
-                <p>Kumasi, Ashanti Region<br>Ghana</p>
+                <p>Aboagye Estate @Ekyem, near Fumesua & Pakoso, Kumasi, Ashanti Region
+                 <br> Ghana, West Africa</p>
               </div>
             </div>
 
@@ -674,7 +675,8 @@
               <div class="contact-details">
                 <h3>Email Address</h3>
                 <p><a href="mailto:info@sompamensah.com">info@sompamensah.com</a><br>
-                <small>Emergency: <a href="mailto:emergency@sompamensah.com">emergency@sompamensah.com</a></small></p>
+                <p><a href="mailto:sompamensahmc@gmail.com ">sompamensahmc@gmail.com </a><br>
+                <b><p>Emergency: <a href="mailto:emergency@sompamensah.com">emergency@sompamensah.com</a></p></b>
               </div>
             </div>
 
@@ -683,58 +685,13 @@
               <div class="contact-details">
                 <h3>WhatsApp Chat</h3>
                 <p>Get instant responses to your questions</p>
-                <a href="https://wa.me/233245583064?text=Hello%2C%20I%20just%20visited%20your%20website%20and%20would%20like%20to%20learn%20more.
+                <a href="https://wa.me/233244292513?text=Hello%2C%20I%20just%20visited%20your%20website%20and%20would%20like%20to%20learn%20more.
                     " class="whatsapp-btn" target="_blank">
                   💬 Chat on WhatsApp
                 </a>
               </div>
             </div>
-          </div>
-
-          <!-- Contact Form -->
-          <div class="contact-form-container">
-            <form class="contact-form" action="#" method="POST">
-              <h2 class="section-title">Send Us a Message</h2>
-              <p class="section-subtitle">Fill out the form below and we'll get back to you as soon as possible.</p>
-
-              <div class="form-group">
-                <label for="name">Full Name *</label>
-                <input type="text" id="name" name="name" required>
-              </div>
-
-              <div class="form-group">
-                <label for="email">Email Address *</label>
-                <input type="email" id="email" name="email" required>
-              </div>
-
-              <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone">
-              </div>
-
-              <div class="form-group">
-                <label for="service">Service Interested In</label>
-                <select id="service" name="service">
-                  <option value="">Select a service</option>
-                  <option value="general-practice">General Practice</option>
-                  <option value="emergency">Emergency Services</option>
-                  <option value="maternity">Maternity Care</option>
-                  <option value="laboratory">Laboratory Services</option>
-                  <option value="pharmacy">Pharmacy</option>
-                  <option value="specialist">Specialist Care</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="message">Message *</label>
-                <textarea id="message" name="message" placeholder="Tell us how we can help you..." required></textarea>
-              </div>
-
-              <button type="submit" class="submit-btn">Send Message</button>
-            </form>
-          </div>
-        </div>
+       
       </section>
 
       <!-- Operating Hours -->
@@ -747,9 +704,9 @@
             <div class="hours-card">
               <h3>Regular Hours</h3>
               <ul class="hours-list">
-                <li><span>Monday - Friday</span><span>8:00 AM - 6:00 PM</span></li>
-                <li><span>Saturday</span><span>9:00 AM - 4:00 PM</span></li>
-                <li><span>Sunday</span><span>10:00 AM - 2:00 PM</span></li>
+                <li><span>Monday - Friday</span><span>24 hours</span></li>
+                <li><span>Saturday</span><span>24 hours</span></li>
+                <li><span>Sunday</span><span>24 hours</span></li>
               </ul>
             </div>
 
@@ -813,7 +770,7 @@
 
         </div>
 
-        <p class="copyright">&copy; Copyright 2025 Sompa Mmensah Medical Center. All Rights Reserved.</p>
+        <p class="copyright"> © Copyright 2025 Sompa Mensah Medical Centre. All Rights Reserved</p>
 
       </div>
 
@@ -821,6 +778,88 @@
   </div>
 
   <!-- JavaScript -->
+
+  <script>
+    const form = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const feedbackMessage = document.getElementById('feedbackMessage');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Disable button and show loading state
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+      feedbackMessage.style.display = 'none';
+
+      try {
+        const formData = new FormData(form);
+        
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          mode: 'no-cors' // Important for Google Apps Script
+        });
+
+        // Since we're using no-cors, we can't read the response
+        // So we assume success if no error was thrown
+        showFeedback('success', '✓ Message sent successfully! We\'ll get back to you soon.');
+        form.reset();
+
+      } catch (error) {
+        showFeedback('error', '✗ Oops! Something went wrong. Please try again or contact us directly.');
+        console.error('Error:', error);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
+      }
+    });
+
+    function showFeedback(type, message) {
+      feedbackMessage.className = `feedback-message ${type}`;
+      feedbackMessage.textContent = message;
+      feedbackMessage.style.display = 'block';
+
+      // Auto-hide after 5 seconds
+      setTimeout(() => {
+        feedbackMessage.style.display = 'none';
+      }, 5000);
+    }
+    
+  </script>
+
+  <!-- 
+  GOOGLE APPS SCRIPT CODE (Paste this in your Google Sheet's Apps Script):
+  
+  function doPost(e) {
+    try {
+      const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+      
+      // Get form data
+      const timestamp = new Date();
+      const name = e.parameter.name || '';
+      const email = e.parameter.email || '';
+      const phone = e.parameter.phone || '';
+      const service = e.parameter.service || '';
+      const message = e.parameter.message || '';
+      
+      // Append data to sheet
+      sheet.appendRow([timestamp, name, email, phone, service, message]);
+      
+      return ContentService.createTextOutput(JSON.stringify({
+        'status': 'success',
+        'message': 'Data saved successfully'
+      })).setMimeType(ContentService.MimeType.JSON);
+      
+    } catch (error) {
+      return ContentService.createTextOutput(JSON.stringify({
+        'status': 'error',
+        'message': error.toString()
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+  }
+  -->
+  </script>
   <script>
     // Mobile menu toggle
     const menuToggle = document.getElementById('menu-toggle');
